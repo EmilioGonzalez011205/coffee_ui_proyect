@@ -1,5 +1,6 @@
 // ignore_for_file: deprecated_member_use
 
+import 'package:coffee_ui_proyect/res/resorces_list.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -95,7 +96,114 @@ class _HomeScreenState extends State<HomeScreen> {
                     color:Colors.white.withOpacity(0.3), 
                     fontSize: 25)),
               ),
-            )
+            ),
+            SizedBox(height: 15,),
+            SizedBox(height: 30,
+            child: ListView.builder(
+              itemCount: 5,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index){
+              return GestureDetector(
+                child: Padding(padding: EdgeInsets.symmetric(horizontal: 10,),
+                child: Text(names[index], 
+                style: TextStyle(
+                  color: category[index] ? Colors.orange : Colors.white.withOpacity(0.4),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 17,
+                ),),
+                ),
+              );
+            },),
+            ),
+            SizedBox(height: 20,),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 370,
+                    width: double.infinity,
+                    child: ListView.builder(
+                      itemCount: 9,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index){
+                        return InkWell(
+                          onTap: (){
+                            // Navigator.push(context, MaterialPageRoute(builder: (context) 
+                            // => ProductScreen(index),));
+                          },
+                          child: Card(
+                            elevation: 20,
+                            color: Colors.white.withOpacity(0.1),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                            margin: EdgeInsets.only(right: 20),
+                            child: Container(
+                              padding: EdgeInsets.all(15),
+                              width: 210,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(10),
+                                    child: SizedBox(height: 170, width: double.infinity,
+                                    child: Stack(
+                                      children: [
+                                        Positioned.fill(child: Image(image:images[index],
+                                        fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                        Align(
+                                          alignment: Alignment.topRight,
+                                          child: Container(
+                                            height: 25,
+                                            width: 50,
+                                            decoration: BoxDecoration(
+                                              color:Color(0xFF1d2630).
+                                                    withOpacity(0.7),
+                                              borderRadius: 
+                                                  BorderRadius.only(
+                                                bottomLeft: 
+                                                    Radius.circular(10),
+                                                ),
+                                            ),
+                                            child: Row(
+                                              mainAxisAlignment:MainAxisAlignment.spaceEvenly,
+                                              children: [
+                                                Icon(
+                                                  Icons.star,
+                                                  color: Colors.orange,
+                                                  size: 14,
+                                                  ),
+                                                  Text(ratting[index].toString(),
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontWeight: FontWeight.bold,
+                                                    ),
+                                                  )
+                                              ],
+                                            )
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    )
+                                  ),
+                                  SizedBox(height: 10,),
+                                  Text(names[index], 
+                                  style: TextStyle(color:Colors.white, fontSize: 30, fontWeight: FontWeight.w500),
+                                  ),
+                                  SizedBox(height: 5,)
+                                ],
+                              ),
+                              ),
+                          ),
+                        );
+                      },),
+                    )
+                  ],
+                ),
+              )
+              )
           ],
         ),
       ),
