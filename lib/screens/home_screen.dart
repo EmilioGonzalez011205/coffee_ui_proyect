@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:coffee_ui_proyect/res/resorces_list.dart';
+import 'package:coffee_ui_proyect/screens/product_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -37,8 +38,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
                     child: Column(
                       children: [
-                        circleIcon(),
-                        circleIcon()
+                        circleRow(),
+                        circleRow()
                         ],
                       ),
                     ),
@@ -129,8 +130,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       itemBuilder: (context, index){
                         return InkWell(
                           onTap: (){
-                            // Navigator.push(context, MaterialPageRoute(builder: (context) 
-                            // => ProductScreen(index),));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) 
+                            => ProductScreen(index:index),));
                           },
                           child: Card(
                             elevation: 20,
@@ -190,16 +191,62 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                   SizedBox(height: 10,),
                                   Text(names[index], 
-                                  style: TextStyle(color:Colors.white, fontSize: 30, fontWeight: FontWeight.w500),
+                                  style: TextStyle(
+                                    color:Colors.white, 
+                                    fontSize: 30, 
+                                    fontWeight: FontWeight.w500),
                                   ),
-                                  SizedBox(height: 5,)
+                                  SizedBox(height: 5,),
+                                  Text(with_[index], 
+                                  style: TextStyle(
+                                    color: Colors.white.withOpacity(0.5),
+                                    fontSize: 15,
+                                    ),
+                                  ),
+                                  SizedBox(height: 15,),
+                                  Row(
+                                    children: [
+                                      Align(
+                                        alignment: Alignment.topLeft,
+                                        child: Text("\$ ", 
+                                        style: TextStyle(
+                                          color: Colors.orange,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold
+                                          ),
+                                        ),
+                                      ),
+                                      Text(prices[index], 
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold
+                                          ),
+                                        ),
+                                    ],
+                                  )
                                 ],
                               ),
                               ),
                           ),
                         );
+
                       },),
-                    )
+                    ),
+                    SizedBox(height: 20,),
+                    Text("Special for you",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                      ),
+                    ),
+                    SizedBox(height: 20,),
+                    customCard(images[5]),
+                    SizedBox(height: 20,),
+                    customCard(images[6]),
+                    SizedBox(height: 20,),
+                    customCard(images[7]),
                   ],
                 ),
               )
@@ -214,13 +261,50 @@ class _HomeScreenState extends State<HomeScreen> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        circleRow(),
-        circleRow(),
+        circleIcon(),
+        circleIcon(),
       ],
     );
   }
   Widget circleIcon(){
     return Icon(Icons.circle, color: Colors.white.withOpacity(0.5),
     size: 10,);
+  }
+
+  Widget customCard(AssetImage asset){
+    return Card(
+      color: Colors.white.withOpacity(0.1),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15),
+      ),
+      child: Container(
+        margin: EdgeInsets.all(10),
+        height: 120,
+        width: double.infinity,
+        child: Row(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Container(
+                height: double.infinity,
+                width: 120,
+                decoration: BoxDecoration(
+                  image: DecorationImage(image: asset, fit: BoxFit.cover)
+                ),
+              ),
+            ),
+            SizedBox(height: 20,),
+            SizedBox(width: 10,),
+            Text(
+              "5 cofee beans You \nMust Try!",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 17,
+                fontWeight: FontWeight.bold,
+              ),)
+          ],
+        ),
+      ),
+    );
   } 
  }
